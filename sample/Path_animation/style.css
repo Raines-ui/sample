@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #434343;
+}
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+ .btn_init{
+     width: 12.5rem;
+     height: 3.75rem;
+     border-radius: 1.2rem;
+     font-size: 1.25rem;
+     font-weight: 600;
+     border: none;
+     text-align: center;
+     overflow: hidden;
+     cursor: pointer;
+     color: #fff;
+ }
+ .inactive{
+    background-color: #8724e4;
+ }
+ .plane_init{
+     fill: #fff;
+ }
+ .active {
+     transition: all 0.5 ease-in-out;
+ }
+ .active svg{
+    offset-path:path("M 10.2,9.8 c28.17-1,35-30,100-100");
+    animation: fly 1.2s forwards ease-in-out; 
+ }
+ @keyframes fly{
+     from{
+        offset-distance: 0;
+        transform: scale(1);
+     }
+     to{
+         offset-distance: 100%;
+         transform: scale(0);
+     }
+ }

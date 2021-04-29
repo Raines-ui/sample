@@ -1,0 +1,40 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Microsoft YaHei";
+}
+body {
+  text-align: center;
+}
+button {
+  position: relative;
+  margin-top: 60px;
+  font-size: 24px;
+  color: white;
+  width: 240px;
+  height: 80px;
+  letter-spacing: 8px;
+  text-indent: 8px;
+  border: none;
+  border-radius: 38px;
+  background: linear-gradient(315deg, #43cea2, #185a9d);
+  overflow: hidden;
+}
+span {
+  position: absolute;
+  display: inline-block;
+  background: rgba(72, 250, 205, 0.2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: animate 1s linear infinite;
+}
+@keyframes animate {
+  0% {
+      width: 0px;
+      height: 0px;
+  }
+  100%{
+      width: 500px;
+      height: 500px;
+  }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box {
+      width: 240px;
+      height: 300px;
+      background-color: #434343;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .box::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: lightslategray;
+      border-radius: 50%;
+      right: -10%;
+      top: -10%;
+    }
+    .box:hover::before {
+      width: 300px;
+      height: 300px;
+      top: -50%;
+      left: 0;
+      transition: 0.5s ease;
+    }
+    img {
+      width: 100%;
+      position: absolute;
+      transform: rotate(10deg);
+    }
+    .box:hover img {
+      transform: rotate(-25deg);
+      transition: 0.5s ease;
+    }
+    .info {
+      width: 100%;
+      height: 30%;
+      font-size: 14px;
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      text-align: center;
+      bottom: 0;
+      left: 0;
+    }
+    .info .detail{
+        width: 100%;
+        position: absolute;
+        bottom: -100%;
+    }
+    .info .proName {
+      display: block;
+      width: 100%;
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      text-align: center;
+      bottom: 50%;
+      transform: translateY(-50%);
+    }
+    .box:hover .info {
+      bottom: 10%;
+      transition: 0.3s ease-in-out;
+    }
+    .box:hover .detail {
+      bottom: 0;
+      transition: 0.3s ease-in-out;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <img src="./images/shoes.png" alt="" />
+      <div class="info">
+        <span class="proName">AnTa</span>
+        <div class="detail">
+          <p>lorem</p>
+          <p>Lorem, ipsum.</p>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
