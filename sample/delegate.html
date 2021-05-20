@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="list">
+      <li>item1</li>
+      <li>item2</li>
+      <li>item3</li>
+      <button>新增列表</button>
+    </ul>
+  </body>
+  <script>
+    const listDom = document.getElementById("list");
+    const items = document.getElementsByTagName("li");
+    const btnDom = document.getElementsByTagName("button")[0];
+    // Array.prototype.slice.call(arguments)  --能将具有length属性的对象转化为数组
+    // 调用数组中的slice方法，并用call来指定要转化的对象
+    // var itemsArr = Array.prototype.slice.call(items);
+    function myEventListener(elem, type, fn) {
+      elem.addEventListener(type, fn);
+    }
+    // listDom.addEventListener("click", function () {
+    //   console.log(listDom.nodeName);
+    // });
+    myEventListener(listDom, "click", (e) => {
+      // console.log(itemsArr);
+      // event.currentTarget 指向事件绑定的元素 event.target 指向事件触发的元素
+      const target = e.target;
+      // node.nodeName 返回一个大写的标签名或属性名
+      if (target.nodeName === "LI") {
+        target.appendChild(document.createTextNode("被点击"));
+      }
+    });
+    myEventListener(btnDom, "click", () => {
+      const newItem = document.createElement("li");
+      const content = document.createTextNode("NewItem");
+      newItem.appendChild(content);
+      listDom.insertBefore(newItem, btnDom);
+    });
+  </script>
+</html>

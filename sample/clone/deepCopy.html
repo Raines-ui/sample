@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深拷贝</title>
+  </head>
+  <body></body>
+  <script>
+    const defobj = {
+      name: "demo",
+      ele: "div",
+      debuglog: (msg) => {
+        console.log("message:" + msg);
+      },
+      arr: [1, 2, 3, 4, [5, 6]],
+      obj1: {
+        name: "child",
+        ele: "span",
+        obj2: {
+          name: "grandson",
+          ele: "p",
+        },
+      },
+    };
+    const obj = {
+      name: "test",
+      type: "clone",
+      sexual: 1,
+      ele: "span",
+      obj1: {
+        name: "clonechild",
+        obj2: {
+          name: "clonegrandson",
+        },
+      },
+      arr: [1, "f", 4, ["a"]],
+    };
+    //检查数据类型
+    function checkType(data) {
+      const dataType = Object.prototype.toString.call(data).slice(8, -1);
+      return dataType;
+    }
+    //根据类型，返回空数组或空对象
+    function getResult(data) {
+      var dataType = checkType(data);
+      if (dataType === "Object") {
+        var res = {};
+        return res;
+      } else if (dataType === "Array") {
+        var res = [];
+        return res;
+      } else {
+        return false;
+      }
+    }
+    function deepCopy(origin, target) {
+      var prop;
+      for (prop in origin) {
+        // hasOwnProperty判断target是否有已存在属性,保存属性并与origin合并
+        // merge
+        if (!target.hasOwnProperty(prop)) {
+          // 访问对象属性 target.name === target['name'] 而prop已经是字符串，target[prop]即可访问
+          if (getResult(origin[prop])) {
+            var res = getResult(origin[prop]);
+            deepCopy(origin[prop], res);
+            target[prop] = res;
+          } else {
+            target[prop] = origin[prop];
+          }
+        } else {
+          //判断已存在属性有没有对象或数组,存在就重新遍历该对象或数组
+          var dataType = checkType(target[prop]);
+          if (dataType === "Object" || dataType === "Array") {
+            deepCopy(origin[prop], target[prop]);
+          }
+        }
+      }
+      return target;
+    }
+    deepCopy(defobj, obj);
+  </script>
+</html>
