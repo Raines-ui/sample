@@ -56,7 +56,10 @@
       }
     }
     function deepCopy(origin, target) {
-      var prop;
+      // 自动创建空对象target，可以不传参target
+      var target = target || {},
+        prop;
+      // var prop;
       for (prop in origin) {
         // hasOwnProperty判断target是否有已存在属性,保存属性并与origin合并
         // merge
@@ -79,6 +82,8 @@
       }
       return target;
     }
-    deepCopy(defobj, obj);
+    // 定义变量obj接收target
+    deepCopy(defobj,obj)
+    // var obj = deepCopy(defobj);
   </script>
 </html>

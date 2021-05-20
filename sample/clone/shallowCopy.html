@@ -16,20 +16,21 @@
       },
       arr: [1, 2, 3, 4],
     };
-    const obj = {
-      name: "test",
-      type: "clone",
-      sexual: 1,
-    };
+    // const obj = {
+    //   name: "test",
+    //   type: "clone",
+    //   sexual: 1,
+    // };
     function shallowCopy(origin, target) {
-      // var target = target || {},
-      //   prop;
+      // 自动创建空对象target，可以不传参target
+      var target = target || {},
+        prop;
       // if (target === undefined) {
       //   target = {};
       // } else {
       //   target = target;
       // }
-      var prop;
+      // var prop;
       for (prop in origin) {
         // 访问对象属性 target.name === target['name'] 而prop已经是字符串，target[prop]即可访问
         target[prop] = origin[prop];
@@ -37,6 +38,7 @@
       // target = Object.assign(obj, origin);
       return target;
     }
-    shallowCopy(defobj, obj);
+    // 定义变量obj接收target
+    var obj = shallowCopy(defobj);
   </script>
 </html>
