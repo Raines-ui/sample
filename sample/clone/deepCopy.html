@@ -23,6 +23,13 @@
           ele: "p",
         },
       },
+      __proto__: {
+        father: "demo",
+        protoobj: {
+          name: "protoobj",
+          ele: "amazing",
+        },
+      },
     };
     const obj = {
       name: "test",
@@ -36,6 +43,7 @@
         },
       },
       arr: [1, "f", 4, ["a"]],
+      arr2: [1, "f", 4, ["a"]],
     };
     //检查数据类型
     function checkType(data) {
@@ -61,29 +69,32 @@
         prop;
       // var prop;
       for (prop in origin) {
-        // hasOwnProperty判断target是否有已存在属性,保存属性并与origin合并
-        // merge
-        if (!target.hasOwnProperty(prop)) {
-          // 访问对象属性 target.name === target['name'] 而prop已经是字符串，target[prop]即可访问
-          if (getResult(origin[prop])) {
-            var res = getResult(origin[prop]);
-            deepCopy(origin[prop], res);
-            target[prop] = res;
+        //避免origin上的__proto__中的自定义属性被target遍历并克隆
+        if (origin.hasOwnProperty(prop)) {
+          // hasOwnProperty判断target是否有origin中的属性,保存属性并与origin合并
+          // merge
+          if (!target.hasOwnProperty(prop)) {
+            // 访问对象属性 target.name === target['name'] 而prop已经是字符串，target[prop]即可访问
+            if (getResult(origin[prop])) {
+              var res = getResult(origin[prop]);
+              deepCopy(origin[prop], res);
+              target[prop] = res;
+            } else {
+              target[prop] = origin[prop];
+            }
           } else {
-            target[prop] = origin[prop];
-          }
-        } else {
-          //判断已存在属性有没有对象或数组,存在就重新遍历该对象或数组
-          var dataType = checkType(target[prop]);
-          if (dataType === "Object" || dataType === "Array") {
-            deepCopy(origin[prop], target[prop]);
+            //判断已存在属性有没有对象或数组,存在就重新遍历该对象或数组
+            var dataType = checkType(target[prop]);
+            if (dataType === "Object" || dataType === "Array") {
+              deepCopy(origin[prop], target[prop]);
+            }
           }
         }
       }
       return target;
     }
     // 定义变量obj接收target
-    deepCopy(defobj,obj)
+    deepCopy(defobj, obj);
     // var obj = deepCopy(defobj);
   </script>
 </html>
