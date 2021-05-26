@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array_Api</title>
+  </head>
+  <body></body>
+  <script>
+    // 操作原数组的api有：push、pop、shift、unshift、splice、sort、reverse
+    // 不可操作原数组的api有：concat、join、split、slice、toString
+    var arr = [487, 87, 1, 0, -1];
+    // sort()排序是按Ascii码排序
+    // sort()的参数可以是函数，函数中会传入两个参数，参数即是数组依次的值，会经过比较然后根据返回值进行冒泡排序
+    // 返回正数，val2会排在val1的后面，负数则val1排在val2后面，0则不动；
+    arr.sort(function (val1, val2) {
+      //   升序
+      //   return val1 - val2;
+      //  降序
+      return val2 - val1;
+    });
+    // push 往数组后面插入数据
+    // arr.push("a", "dada", 4, 8);
+    Array.prototype.myPush = function () {
+      for (var i = 0; i < arguments.length; i++) {
+        this[this.length] = arguments[i];
+      }
+      return this.length;
+    };
+    // arr.myPush("晓", "ze");
+    // reverse() 原数组取反，返回原数组
+    Array.prototype.myReverse = function () {
+      // slice创建相同的新数组
+      var arr = this.slice();
+      var len = this.length - 1;
+      for (var i = 0; i < this.length; i++) {
+        this[i] = arr[len];
+        // 反向获取arr的值直到长度为0
+        len > 0 ? len-- : (len = 0);
+      }
+      return this;
+    };
+    // reverse 改变原数组并取反，返回新数组
+    Array.prototype.NewReverse = function () {
+      // 创建空数组
+      var arr = [];
+      var len = this.length - 1;
+      for (var i = len; i >= 0; i--) {
+        arr.push(this[i]);
+        console.log(this[i]);
+      }
+      return arr;
+    };
+    // slice 截取原数组并返回新数组
+    // start：开始截取位置  end：截取到该位置的前一位
+    Array.prototype.mySlice = function (start, end) {
+      var arr = [];
+      arguments.length === 0
+        ? (arr = this)
+        : arguments.length === 1
+        ? (end = this.length)
+        : ((start = start), (end = end));
+      var end =
+        end < this.length && end >= 0
+          ? end
+          : end < 0
+          ? end + this.length
+          : this.length;
+      var start = start >= 0 ? start : start + this.length;
+      for (var i = 0; start < end; i++) {
+        arr[i] = this[start];
+        start++;
+      }
+      return arr;
+      // if (arguments.length === 0) {
+      //   arr = this;
+      // } else if (arguments.length === 1) {
+      //   end = this.length;
+      // } else {
+      //   start = start;
+      //   end = end;
+      // }
+      // if (start >= 0) {
+      //   var start = start;
+      // } else {
+      //   var start = start + this.length;
+      // }
+      // console.log("start:" + start);
+      // console.log("end:" + end);
+      // if (end < this.length && end >= 0) {
+      //   var end = end;
+      // } else if (end < 0) {
+      //   var end = end + this.length;
+      // } else {
+      //   var end = this.length;
+      // }
+      // console.log(end);
+    };
+  </script>
+</html>
