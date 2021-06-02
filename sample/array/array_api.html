@@ -8,8 +8,8 @@
   </head>
   <body></body>
   <script>
-    // 操作原数组的api有：push、pop、shift、unshift、splice、sort、reverse
-    // 不可操作原数组的api有：concat、join、split、slice、toString
+    // 改变原数组的api有：push、pop、shift、unshift、sort、reverse、splice
+    // 不改变原数组的api有：concat、join、split、slice、toString
     var arr = [487, 87, 1, 0, -1];
     // sort()排序是按Ascii码排序
     // sort()的参数可以是函数，函数中会传入两个参数，参数即是数组依次的值，会经过比较然后根据返回值进行冒泡排序
@@ -97,5 +97,77 @@
       // }
       // console.log(end);
     };
+    // 封装type方法实现判断出所有数据类型：基础数据类型以及引用数据类型
+    function checkType(data) {
+      var objType = {
+        "[object Object]": "object",
+        "[object Array]": "array",
+        "[object Number]": "object-number",
+        "[object String]": "object-string",
+        "[object Boolean]": "object-boolean",
+        "[object Null]": "null",
+      };
+      if (typeof data === "object") {
+        var dataType = Object.prototype.toString.call(data);
+        return objType[dataType];
+      } else {
+        return typeof data;
+      }
+    }
+    // 数组去重
+    var uarr = [1, 1, 2, 2, 25, "a", "undefined", 448, 88, "a", 3, "undefined"];
+    Array.prototype.unique = function () {
+      var arr = [],
+        temp = {},
+        len = this.length;
+      for (var i = 0; i < len; i++) {
+        var prop = this[i];
+        // if (!temp.hasOwnProperty(prop)) {
+        //   temp[prop] = "a";
+        //   arr.push(this[i]);
+        // }
+        if (!temp[prop]) {
+          temp[prop] = "a";
+          arr.push(this[i]);
+        }
+      }
+      return arr;
+    };
+    // 字符串去重
+    var str = "afsadsadsahfsghejrhqiwt";
+    function distinct(data) {
+      // 字符串转数组
+      var arr = data.split("");
+      // 利用数组去重
+      var str_arr = arr.unique();
+      // join重新拼接字符串
+      var rtn_str = str_arr.join("");
+      return rtn_str;
+    }
+    // 一个字符串[a-z]组成，找出该字符串第一个只出现一次的字母
+    var str = "afsapdsadsawhfosghejrhqiwt";
+    function f_unique(data) {
+      var str_arr = data.split(""),
+        temp = {},
+        len = str_arr.length,
+        i;
+      rtn_arr = [];
+      for (i = 0; i < len; i++) {
+        var prop = str_arr[i];
+        if (!temp[prop]) {
+          temp[prop] = 1;
+        } else {
+          temp[prop]++;
+        }
+      }
+      for (var key in temp) {
+        if (temp[key] === 1) {
+          rtn_arr.push(key);
+        }
+      }
+      // console.log(temp);
+      // console.log("rtn_arr:" + rtn_arr);
+      return rtn_arr[0];
+    }
   </script>
 </html>
